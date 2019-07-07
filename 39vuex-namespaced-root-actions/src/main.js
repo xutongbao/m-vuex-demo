@@ -17,18 +17,14 @@ const moduleA = {
     moduleAChildModule: {
       namespaced: true, 
       state: {
-        count: 0
       },
       getters: {
       },
       mutations: {
-        increment(state) {
-          state.count++
-        }
       },
       actions: {
-        increment({commit}) {
-          commit('increment')
+        increment({dispatch}) {
+          dispatch('someAction', null, { root: true })
         }
       } 
     }
@@ -38,6 +34,7 @@ const moduleA = {
 const moduleB = {
   namespaced: true,
   state: {
+    b: 2
   },
   getters: {},
   mutations: {
@@ -45,7 +42,13 @@ const moduleB = {
       state.b++
     }
   },
-  actions: {   
+  actions: {
+    someAction: {
+      root: true,
+      handler({commit}, payload) {
+        commit('increment')
+      }
+    },    
   }
 }
 

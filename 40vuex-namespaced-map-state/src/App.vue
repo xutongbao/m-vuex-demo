@@ -1,23 +1,24 @@
 <template>
   <div id="app">
-    <div>{{count}}</div>
+    <div>{{count}}, {{count2}}</div>
     <Control></Control>
   </div>
 </template>
 
 <script>
 import Control from './Control.vue'
-import { createNamespacedHelpers } from 'vuex'
-
-const {mapState} = createNamespacedHelpers('moduleA/moduleAChildModule')
+import { mapState } from 'vuex'
 
 export default {
   components: {
     Control
   },
-  computed: {   
+  computed: {
     ...mapState({
-      count: state => state.count
+      count: state => state.moduleA.moduleAChildModule.count
+    }),    
+    ...mapState('moduleA/moduleAChildModule', {
+      count2: state => state.count
     }),
   }
 }

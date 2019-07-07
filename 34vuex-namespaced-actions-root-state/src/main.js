@@ -7,30 +7,17 @@ Vue.use(Vuex)
 const moduleA = {
   namespaced: true,
   state: {
+    count: 0
   },
   getters: {},
   mutations: {
+    increment(state, step) {
+      state.count = state.count + step
+    }
   },
   actions: {
-  },
-  modules: {
-    moduleAChildModule: {
-      namespaced: true, 
-      state: {
-        count: 0
-      },
-      getters: {
-      },
-      mutations: {
-        increment(state) {
-          state.count++
-        }
-      },
-      actions: {
-        increment({commit}) {
-          commit('increment')
-        }
-      } 
+    increment({ state, commit, rootState }) {
+      commit('increment', rootState.step)
     }
   }
 }
@@ -38,22 +25,29 @@ const moduleA = {
 const moduleB = {
   namespaced: true,
   state: {
+    count: 1
   },
   getters: {},
   mutations: {
-    increment(state) {
-      state.b++
+    increment(state, step) {
+      state.count = state.count + step
     }
   },
-  actions: {   
+  actions: {
+    increment({ state, commit, rootState }) {
+      commit('increment', rootState.step)
+    }
   }
 }
 
 const store = new Vuex.Store({
+  state: {
+    step: 3
+  },
   modules: {
     moduleA,
     moduleB,
-  },
+  }
 })
 
 new Vue({

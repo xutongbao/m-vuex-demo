@@ -10,7 +10,7 @@ export default {
 	name: 'Control',
 	methods: {
 		handleAddModuleA() {
-			this.$store.dispatch('moduleA/moduleAChildModule/increment')
+			this.$store.commit('moduleA/moduleAChildModule/increment')
 		}	
 	}
 }

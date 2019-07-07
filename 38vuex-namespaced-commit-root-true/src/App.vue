@@ -7,18 +7,14 @@
 
 <script>
 import Control from './Control.vue'
-import { createNamespacedHelpers } from 'vuex'
-
-const {mapState} = createNamespacedHelpers('moduleA/moduleAChildModule')
+import { mapState } from 'vuex'
 
 export default {
   components: {
     Control
   },
-  computed: {   
-    ...mapState({
-      count: state => state.count
-    }),
+  computed: {
+    ...mapState(['count']),
   }
 }
 </script>
